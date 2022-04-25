@@ -71,17 +71,19 @@ export class HttpClient {
       requestParams.headers.put = {};
       body = this.createFormData(body);
     }
-    return this.instance.request({
-      ...requestParams,
-      headers: {
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
-        ...(requestParams.headers || {}),
-      },
-      params: query,
-      responseType: responseFormat,
-      data: body,
-      url: path,
-    });
+    return this.instance
+      .request({
+        ...requestParams,
+        headers: {
+          ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+          ...(requestParams.headers || {}),
+        },
+        params: query,
+        responseType: responseFormat,
+        data: body,
+        url: path,
+      })
+      .then((response) => response.data);
   };
 }
 /**
@@ -91,17 +93,43 @@ export class HttpClient {
  *
  * Client session manager
  */
-export class Api extends HttpClient {
-  session = {
+export class Api {
+  http;
+  constructor(http) {
+    this.http = http;
+  }
+  /**
+   * @description Get catalog item recommendation
+   *
+   * @name CreateSession
+   * @summary Retrieve item categories
+   * @request POST:/session
+   * @response `200` `Session`
+   * @response `401` `UnauthorizedError`
+   * @response `500` `InternalServerError`
+   * @response `default` `BadRequest`
+   */
+  createSession = (data, params = {}) =>
+    this.http.request({
+      path: `/session`,
+      method: "POST",
+      body: data,
+      type: ContentType.Json,
+      ...params,
+    });
+  token = {
     /**
      * @description Retrieve complete information of the session identified by a API token.
      *
      * @name GetSession
      * @summary Get session information for a specific user
      * @request GET:/session/{token}
+     * @response `200` `Session`
+     * @response `404` `NotFound`
+     * @response `500` `InternalServerError`
      */
     getSession: (token, params = {}) =>
-      this.request({
+      this.http.request({
         path: `/session/${token}`,
         method: "GET",
         ...params,
@@ -113,27 +141,16 @@ export class Api extends HttpClient {
      * @summary Delete client session
      * @request DELETE:/session/{token}
      * @secure
+     * @response `200` `void` Deletes item by its identifier
+     * @response `401` `UnauthorizedError`
+     * @response `500` `InternalServerError`
+     * @response `default` `BadRequest`
      */
     deleteSession: (token, params = {}) =>
-      this.request({
+      this.http.request({
         path: `/session/${token}`,
         method: "DELETE",
         secure: true,
-        ...params,
-      }),
-    /**
-     * @description Get catalog item recommendation
-     *
-     * @name CreateSession
-     * @summary Retrieve item categories
-     * @request POST:/session
-     */
-    createSession: (data, params = {}) =>
-      this.request({
-        path: `/session`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
         ...params,
       }),
   };
