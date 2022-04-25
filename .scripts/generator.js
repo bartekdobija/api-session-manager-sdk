@@ -10,7 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const inputDir = process.env.SWAGGER_DIR || '../swagger';
 const outputDir = `${__dirname}/${process.env.OUT_DIR || '../dist'}`;
 const regex = /.swagger.(ya?ml|json)/i
-const reserved = /(\.|-)/i
+const reserved = /(\.|-)/ig
 
 function validModuleName(name) {
   return name.replace(reserved, '_');
@@ -21,7 +21,7 @@ async function generateIndex(output, imports) {
     imports.map(v => `import * as ${validModuleName(v)} from './lib/${v}';`)
            .join('\n');
 
-  fs.writeFileSync(output, content, { flag: 'wx' });
+  fs.writeFileSync(output, content, { flag: 'w'});
 }
 
 async function generateClient(input, output, name) {
