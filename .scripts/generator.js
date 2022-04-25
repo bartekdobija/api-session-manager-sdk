@@ -27,7 +27,6 @@ async function generateIndex(output, imports) {
 async function generateClient(input, output, name) {
   exec(`
     npx swagger-typescript-api \
-      --unwrap-response-data \
       --extract-request-params \
       --extract-request-body \
       --responses \

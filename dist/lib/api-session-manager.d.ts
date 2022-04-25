@@ -84,7 +84,15 @@ export declare class HttpClient<SecurityDataType = unknown> {
   setSecurityData: (data: SecurityDataType | null) => void;
   private mergeRequestParams;
   private createFormData;
-  request: <T = any, _E = any>({ secure, path, type, query, format, body, ...params }: FullRequestParams) => Promise<T>;
+  request: <T = any, _E = any>({
+    secure,
+    path,
+    type,
+    query,
+    format,
+    body,
+    ...params
+  }: FullRequestParams) => Promise<AxiosResponse<T>>;
 }
 /**
  * @title api-session-manager

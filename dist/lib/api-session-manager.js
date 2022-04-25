@@ -71,19 +71,17 @@ export class HttpClient {
       requestParams.headers.put = {};
       body = this.createFormData(body);
     }
-    return this.instance
-      .request({
-        ...requestParams,
-        headers: {
-          ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
-          ...(requestParams.headers || {}),
-        },
-        params: query,
-        responseType: responseFormat,
-        data: body,
-        url: path,
-      })
-      .then((response) => response.data);
+    return this.instance.request({
+      ...requestParams,
+      headers: {
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+        ...(requestParams.headers || {}),
+      },
+      params: query,
+      responseType: responseFormat,
+      data: body,
+      url: path,
+    });
   };
 }
 /**
