@@ -7,3 +7,4 @@ import * as api_iplocation from './lib/api-iplocation';
 import * as api_messages from './lib/api-messages';
 import * as api_notification from './lib/api-notification';
 import * as api_search from './lib/api-search';
+import * as api_session-manager from './lib/api-session-manager';

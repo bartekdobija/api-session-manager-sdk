@@ -14,7 +14,7 @@ async function downloadSwagger(service) {
   const url = endpointTpl
     .replace('{owner}', process.env.GITHUB_OWNER || 'bartekdobija')
     .replace('{repo}', process.env.GITHUB_REPO || 'api-session-manager')
-    .replace('{path}', `${service}/openapi.yaml`);
+    .replace('{path}', `openapi.yaml`);
 
   console.log('Fetching swagger for service', service);
   const response = await axios.get(url, {
