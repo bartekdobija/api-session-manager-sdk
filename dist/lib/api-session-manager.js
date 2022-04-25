@@ -98,26 +98,7 @@ export class Api {
   constructor(http) {
     this.http = http;
   }
-  /**
-   * @description Get catalog item recommendation
-   *
-   * @name CreateSession
-   * @summary Retrieve item categories
-   * @request POST:/session
-   * @response `200` `Session`
-   * @response `401` `UnauthorizedError`
-   * @response `500` `InternalServerError`
-   * @response `default` `BadRequest`
-   */
-  createSession = (data, params = {}) =>
-    this.http.request({
-      path: `/session`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-  token = {
+  session = {
     /**
      * @description Retrieve complete information of the session identified by a API token.
      *
@@ -151,6 +132,25 @@ export class Api {
         path: `/session/${token}`,
         method: "DELETE",
         secure: true,
+        ...params,
+      }),
+    /**
+     * @description Get catalog item recommendation
+     *
+     * @name CreateSession
+     * @summary Retrieve item categories
+     * @request POST:/session
+     * @response `200` `Session`
+     * @response `401` `UnauthorizedError`
+     * @response `500` `InternalServerError`
+     * @response `default` `BadRequest`
+     */
+    createSession: (data, params = {}) =>
+      this.http.request({
+        path: `/session`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         ...params,
       }),
   };

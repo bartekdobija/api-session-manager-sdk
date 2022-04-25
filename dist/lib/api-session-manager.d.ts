@@ -96,19 +96,7 @@ export declare class HttpClient<SecurityDataType = unknown> {
 export declare class Api<SecurityDataType extends unknown> {
   http: HttpClient<SecurityDataType>;
   constructor(http: HttpClient<SecurityDataType>);
-  /**
-   * @description Get catalog item recommendation
-   *
-   * @name CreateSession
-   * @summary Retrieve item categories
-   * @request POST:/session
-   * @response `200` `Session`
-   * @response `401` `UnauthorizedError`
-   * @response `500` `InternalServerError`
-   * @response `default` `BadRequest`
-   */
-  createSession: (data: SessionCreationDto, params?: RequestParams) => Promise<AxiosResponse<Session>>;
-  token: {
+  session: {
     /**
      * @description Retrieve complete information of the session identified by a API token.
      *
@@ -133,5 +121,17 @@ export declare class Api<SecurityDataType extends unknown> {
      * @response `default` `BadRequest`
      */
     deleteSession: (token: string, params?: RequestParams) => Promise<AxiosResponse<void>>;
+    /**
+     * @description Get catalog item recommendation
+     *
+     * @name CreateSession
+     * @summary Retrieve item categories
+     * @request POST:/session
+     * @response `200` `Session`
+     * @response `401` `UnauthorizedError`
+     * @response `500` `InternalServerError`
+     * @response `default` `BadRequest`
+     */
+    createSession: (data: SessionCreationDto, params?: RequestParams) => Promise<AxiosResponse<Session>>;
   };
 }
