@@ -71,17 +71,19 @@ export class HttpClient {
       requestParams.headers.put = {};
       body = this.createFormData(body);
     }
-    return this.instance.request({
-      ...requestParams,
-      headers: {
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
-        ...(requestParams.headers || {}),
-      },
-      params: query,
-      responseType: responseFormat,
-      data: body,
-      url: path,
-    });
+    return this.instance
+      .request({
+        ...requestParams,
+        headers: {
+          ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+          ...(requestParams.headers || {}),
+        },
+        params: query,
+        responseType: responseFormat,
+        data: body,
+        url: path,
+      })
+      .then((response) => response.data);
   };
 }
 /**
@@ -103,9 +105,6 @@ export class Api {
      * @name GetSession
      * @summary Get session information for a specific user
      * @request GET:/session/{token}
-     * @response `200` `Session`
-     * @response `404` `NotFound`
-     * @response `500` `InternalServerError`
      */
     getSession: (token, params = {}) =>
       this.http.request({
@@ -120,10 +119,6 @@ export class Api {
      * @summary Delete client session
      * @request DELETE:/session/{token}
      * @secure
-     * @response `200` `void` Deletes item by its identifier
-     * @response `401` `UnauthorizedError`
-     * @response `500` `InternalServerError`
-     * @response `default` `BadRequest`
      */
     deleteSession: (token, params = {}) =>
       this.http.request({
@@ -138,10 +133,6 @@ export class Api {
      * @name CreateSession
      * @summary Retrieve item categories
      * @request POST:/session
-     * @response `200` `Session`
-     * @response `401` `UnauthorizedError`
-     * @response `500` `InternalServerError`
-     * @response `default` `BadRequest`
      */
     createSession: (data, params = {}) =>
       this.http.request({

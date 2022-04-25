@@ -84,15 +84,7 @@ export declare class HttpClient<SecurityDataType = unknown> {
   setSecurityData: (data: SecurityDataType | null) => void;
   private mergeRequestParams;
   private createFormData;
-  request: <T = any, _E = any>({
-    secure,
-    path,
-    type,
-    query,
-    format,
-    body,
-    ...params
-  }: FullRequestParams) => Promise<AxiosResponse<T>>;
+  request: <T = any, _E = any>({ secure, path, type, query, format, body, ...params }: FullRequestParams) => Promise<T>;
 }
 /**
  * @title api-session-manager
@@ -111,9 +103,6 @@ export declare class Api<SecurityDataType extends unknown> {
      * @name GetSession
      * @summary Get session information for a specific user
      * @request GET:/session/{token}
-     * @response `200` `Session`
-     * @response `404` `NotFound`
-     * @response `500` `InternalServerError`
      */
     getSession: (token: string, params?: RequestParams) => Promise<AxiosResponse<Session>>;
     /**
@@ -123,10 +112,6 @@ export declare class Api<SecurityDataType extends unknown> {
      * @summary Delete client session
      * @request DELETE:/session/{token}
      * @secure
-     * @response `200` `void` Deletes item by its identifier
-     * @response `401` `UnauthorizedError`
-     * @response `500` `InternalServerError`
-     * @response `default` `BadRequest`
      */
     deleteSession: (token: string, params?: RequestParams) => Promise<AxiosResponse<void>>;
     /**
@@ -135,10 +120,6 @@ export declare class Api<SecurityDataType extends unknown> {
      * @name CreateSession
      * @summary Retrieve item categories
      * @request POST:/session
-     * @response `200` `Session`
-     * @response `401` `UnauthorizedError`
-     * @response `500` `InternalServerError`
-     * @response `default` `BadRequest`
      */
     createSession: (data: SessionCreationDto, params?: RequestParams) => Promise<AxiosResponse<Session>>;
   };
