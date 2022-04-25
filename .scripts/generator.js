@@ -30,8 +30,10 @@ async function generateClient(input, output, name) {
       --unwrap-response-data \
       --extract-request-params \
       --extract-request-body \
+      --responses \
       --axios \
       --js \
+      --module-name-index 0 \
       --single-http-client \
       --name ${name} \
       --path "${input}" \
