@@ -21,7 +21,7 @@ async function generateIndex(output, imports) {
     imports.map(v => `import * as ${validModuleName(v)} from './lib/${v}';`)
            .join('\n');
 
-  fs.writeFileSync(output, content, { flag: 'a'});
+  fs.writeFileSync(output, content, { flag: 'w'});
 }
 
 async function generateClient(input, output, name) {
