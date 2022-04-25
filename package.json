@@ -1,0 +1,19 @@
+{
+  "name": "api-session-manager-sdk",
+  "version": "0.0.1",
+  "description": "Client SDK generator for session manager REST service",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sdk:generate": "SYNC_SERVICES='api-session-manager' GITHUB_TOKEN=$(cat ~/.github_token) node .scripts/sync.js && node .scripts/generator.js",
+    "release": "yarn sdk:generate && .scripts/release.sh"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "dotenv": "^16.0.0",
+    "swagger-typescript-api": "^9.3.1"
+  }
+}
