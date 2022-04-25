@@ -97,6 +97,30 @@ export declare class Api<SecurityDataType extends unknown> {
   http: HttpClient<SecurityDataType>;
   constructor(http: HttpClient<SecurityDataType>);
   /**
+   * @description Retrieve complete information of the session identified by a API token.
+   *
+   * @name GetSession
+   * @summary Get session information for a specific user
+   * @request GET:/session/{token}
+   * @response `200` `Session`
+   * @response `404` `NotFound`
+   * @response `500` `InternalServerError`
+   */
+  getSession: (token: string, params?: RequestParams) => Promise<AxiosResponse<Session>>;
+  /**
+   * @description Delete session information from the resource pool.
+   *
+   * @name DeleteSession
+   * @summary Delete client session
+   * @request DELETE:/session/{token}
+   * @secure
+   * @response `200` `void` Deletes item by its identifier
+   * @response `401` `UnauthorizedError`
+   * @response `500` `InternalServerError`
+   * @response `default` `BadRequest`
+   */
+  deleteSession: (token: string, params?: RequestParams) => Promise<AxiosResponse<void>>;
+  /**
    * @description Get catalog item recommendation
    *
    * @name CreateSession
@@ -108,30 +132,4 @@ export declare class Api<SecurityDataType extends unknown> {
    * @response `default` `BadRequest`
    */
   createSession: (data: SessionCreationDto, params?: RequestParams) => Promise<AxiosResponse<Session>>;
-  token: {
-    /**
-     * @description Retrieve complete information of the session identified by a API token.
-     *
-     * @name GetSession
-     * @summary Get session information for a specific user
-     * @request GET:/session/{token}
-     * @response `200` `Session`
-     * @response `404` `NotFound`
-     * @response `500` `InternalServerError`
-     */
-    getSession: (token: string, params?: RequestParams) => Promise<AxiosResponse<Session>>;
-    /**
-     * @description Delete session information from the resource pool.
-     *
-     * @name DeleteSession
-     * @summary Delete client session
-     * @request DELETE:/session/{token}
-     * @secure
-     * @response `200` `void` Deletes item by its identifier
-     * @response `401` `UnauthorizedError`
-     * @response `500` `InternalServerError`
-     * @response `default` `BadRequest`
-     */
-    deleteSession: (token: string, params?: RequestParams) => Promise<AxiosResponse<void>>;
-  };
 }
