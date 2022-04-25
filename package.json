@@ -1,6 +1,6 @@
 {
   "name": "api-session-manager-sdk",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Client SDK generator for session manager REST service",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
