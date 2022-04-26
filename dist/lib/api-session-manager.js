@@ -93,11 +93,7 @@ export class HttpClient {
  *
  * Client session manager
  */
-export class Api {
-  http;
-  constructor(http) {
-    this.http = http;
-  }
+export class Api extends HttpClient {
   /**
    * @description Retrieve complete information of the session identified by a API token.
    *
@@ -109,7 +105,7 @@ export class Api {
    * @response `500` `InternalServerError`
    */
   getSession = (token, params = {}) =>
-    this.http.request({
+    this.request({
       path: `/session/${token}`,
       method: "GET",
       ...params,
@@ -127,7 +123,7 @@ export class Api {
    * @response `default` `BadRequest`
    */
   deleteSession = (token, params = {}) =>
-    this.http.request({
+    this.request({
       path: `/session/${token}`,
       method: "DELETE",
       secure: true,
@@ -145,7 +141,7 @@ export class Api {
    * @response `default` `BadRequest`
    */
   createSession = (data, params = {}) =>
-    this.http.request({
+    this.request({
       path: `/session`,
       method: "POST",
       body: data,

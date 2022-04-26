@@ -93,9 +93,7 @@ export declare class HttpClient<SecurityDataType = unknown> {
  *
  * Client session manager
  */
-export declare class Api<SecurityDataType extends unknown> {
-  http: HttpClient<SecurityDataType>;
-  constructor(http: HttpClient<SecurityDataType>);
+export declare class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   /**
    * @description Retrieve complete information of the session identified by a API token.
    *
