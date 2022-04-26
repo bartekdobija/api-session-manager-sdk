@@ -23,7 +23,7 @@ export class HttpClient {
   secure;
   format;
   constructor({ securityWorker, secure, format, ...axiosConfig } = {}) {
-    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || "{server}/v1" });
+    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || "http://localhost:8087" });
     this.secure = secure;
     this.format = format;
     this.securityWorker = securityWorker;
@@ -89,63 +89,65 @@ export class HttpClient {
 /**
  * @title api-session-manager
  * @version 1.0.0
- * @baseUrl {server}/v1
+ * @baseUrl http://localhost:8087
  *
- * Client session manager
+ * Client session management API
  */
 export class Api extends HttpClient {
-  /**
-   * @description Retrieve complete information of the session identified by a API token.
-   *
-   * @name GetSession
-   * @summary Get session information for a specific user
-   * @request GET:/session/{token}
-   * @response `200` `Session`
-   * @response `404` `NotFound`
-   * @response `500` `InternalServerError`
-   */
-  getSession = (token, params = {}) =>
-    this.request({
-      path: `/session/${token}`,
-      method: "GET",
-      ...params,
-    });
-  /**
-   * @description Delete session information from the resource pool.
-   *
-   * @name DeleteSession
-   * @summary Delete client session
-   * @request DELETE:/session/{token}
-   * @secure
-   * @response `200` `void` Deletes item by its identifier
-   * @response `401` `UnauthorizedError`
-   * @response `500` `InternalServerError`
-   * @response `default` `BadRequest`
-   */
-  deleteSession = (token, params = {}) =>
-    this.request({
-      path: `/session/${token}`,
-      method: "DELETE",
-      secure: true,
-      ...params,
-    });
-  /**
-   * @description Get catalog item recommendation
-   *
-   * @name CreateSession
-   * @summary Retrieve item categories
-   * @request POST:/session
-   * @response `200` `Session`
-   * @response `401` `UnauthorizedError`
-   * @response `500` `InternalServerError`
-   * @response `default` `BadRequest`
-   */
-  createSession = (data, params = {}) =>
-    this.request({
-      path: `/session`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
+  v1 = {
+    /**
+     * @description Retrieve complete information of the session identified by a API token.
+     *
+     * @name GetSession
+     * @summary Get session information for a specific user
+     * @request GET:/v1/session/{token}
+     * @response `200` `Session`
+     * @response `404` `NotFound`
+     * @response `500` `InternalServerError`
+     */
+    getSession: (token, params = {}) =>
+      this.request({
+        path: `/v1/session/${token}`,
+        method: "GET",
+        ...params,
+      }),
+    /**
+     * @description Delete session information from the resource pool.
+     *
+     * @name DeleteSession
+     * @summary Delete client session
+     * @request DELETE:/v1/session/{token}
+     * @secure
+     * @response `200` `void` Deletes item by its identifier
+     * @response `401` `UnauthorizedError`
+     * @response `500` `InternalServerError`
+     * @response `default` `BadRequest`
+     */
+    deleteSession: (token, params = {}) =>
+      this.request({
+        path: `/v1/session/${token}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+    /**
+     * @description Get catalog item recommendation
+     *
+     * @name CreateSession
+     * @summary Retrieve item categories
+     * @request POST:/v1/session
+     * @response `200` `Session`
+     * @response `401` `UnauthorizedError`
+     * @response `500` `InternalServerError`
+     * @response `default` `BadRequest`
+     */
+    createSession: (data, params = {}) =>
+      this.request({
+        path: `/v1/session`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+  };
 }

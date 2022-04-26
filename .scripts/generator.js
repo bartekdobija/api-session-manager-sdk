@@ -33,7 +33,7 @@ async function generateClient(input, output, name) {
       --responses \
       --axios \
       --js \
-      --module-name-index 2 \
+      --module-name-index 0 \
       --name ${name} \
       --path "${input}" \
       --output "${output}"
