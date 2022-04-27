@@ -8,7 +8,7 @@ import 'dotenv/config';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const inputDir = process.env.SWAGGER_DIR || '../swagger';
-const outputDir = `${__dirname}/${process.env.OUT_DIR || '../dist'}`;
+const outputDir = `${__dirname}/${process.env.OUT_DIR || '../src'}`;
 const regex = /.swagger.(ya?ml|json)/i
 const reserved = /(\.|-)/ig
 
@@ -32,7 +32,6 @@ async function generateClient(input, output, name) {
       --extract-request-body \
       --responses \
       --axios \
-      --js \
       --module-name-index 0 \
       --name ${name} \
       --path "${input}" \
@@ -54,8 +53,7 @@ async function main() {
                    file.replace('.swagger.yaml', ''))
   );
 
-  [`${outputDir}/index.js`, `${outputDir}/index.d.ts`]
-    .forEach(v => generateIndex(v, names))
+  generateIndex(`${outputDir}/index.ts`, names)
 }
 
 main();
