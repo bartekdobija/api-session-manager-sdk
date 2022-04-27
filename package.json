@@ -6,7 +6,6 @@
   "types": "dist/index.d.ts",
   "license": "MIT",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "tsc",
     "sdk:generate": "SYNC_SERVICES='api-session-manager' GITHUB_TOKEN=$(cat ~/.github_token) node .scripts/sync.js && node .scripts/generator.js",

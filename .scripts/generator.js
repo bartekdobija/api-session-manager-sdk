@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 
-import fs from 'fs';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { exec } from 'child_process';
-import 'dotenv/config';
+const exec = require('child_process').exec;
+const fs = require('fs');
+require('dotenv/config');
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 const inputDir = process.env.SWAGGER_DIR || '../swagger';
 const outputDir = `${__dirname}/${process.env.OUT_DIR || '../src'}`;
 const regex = /.swagger.(ya?ml|json)/i
