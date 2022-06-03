@@ -1,15 +1,24 @@
 {
-  "name": "api-session-manager-sdk",
+  "name": "@spotly/api-session-manager-sdk",
   "version": "0.0.24",
   "description": "Client SDK generator for session manager REST service",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bartekdobija/api-session-manager-sdk.git"
+  },
+  "author": "Bartek Dobija",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bartekdobija/api-session-manager-sdk/issues"
+  },
+  "homepage": "https://github.com/bartekdobija/api-session-manager-sdk#readme",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "license": "MIT",
-  "private": true,
   "scripts": {
     "build": "tsc",
     "sdk:generate": "SYNC_SERVICES='api-session-manager' GITHUB_TOKEN=$(cat ~/.github_token) node .scripts/sync.js && node .scripts/generator.js",
-    "release": "yarn sdk:generate && yarn build && .scripts/release.sh"
+    "release": "npm run sdk:generate && npm version --patch && npm run build && npm publish && .scripts/release.sh",
+    "artifactregistry-login": "npx google-artifactregistry-auth"
   },
   "dependencies": {
     "axios": "^0.21.4",
