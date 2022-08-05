@@ -1,1 +1,1 @@
-export * from './lib/api-session-manager';
+export * as api_session_manager from './lib/api-session-manager';
