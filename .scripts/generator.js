@@ -15,7 +15,7 @@ function validModuleName(name) {
 
 async function generateIndex(output, imports) {
   const content =
-    imports.map(v => `export * as ${validModuleName(v)} from './lib/${v}';`)
+    imports.map(v => `export * from './lib/${v}';`)
            .join('\n');
 
   fs.writeFileSync(output, content, { flag: 'w'});

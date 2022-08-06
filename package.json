@@ -1,6 +1,6 @@
 {
   "name": "@spotly/api-session-manager-sdk",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "Client SDK generator for session manager REST service",
   "repository": {
     "type": "git",
