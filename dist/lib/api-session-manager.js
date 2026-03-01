@@ -10,7 +10,7 @@ var ContentType;
     ContentType["Json"] = "application/json";
     ContentType["FormData"] = "multipart/form-data";
     ContentType["UrlEncoded"] = "application/x-www-form-urlencoded";
-})(ContentType = exports.ContentType || (exports.ContentType = {}));
+})(ContentType || (exports.ContentType = ContentType = {}));
 class HttpClient {
     instance;
     securityData = null;
@@ -32,7 +32,7 @@ class HttpClient {
             ...params1,
             ...(params2 || {}),
             headers: {
-                ...(this.instance.defaults.headers || {}),
+                ...(this.instance.defaults.headers?.common || {}),
                 ...(params1.headers || {}),
                 ...((params2 && params2.headers) || {}),
             },
@@ -57,9 +57,6 @@ class HttpClient {
         const requestParams = this.mergeRequestParams(params, secureParams);
         const responseFormat = (format && this.format) || void 0;
         if (type === ContentType.FormData && body && body !== null && typeof body === "object") {
-            requestParams.headers.common = { Accept: "*/*" };
-            requestParams.headers.post = {};
-            requestParams.headers.put = {};
             body = this.createFormData(body);
         }
         return this.instance

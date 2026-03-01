@@ -23,7 +23,7 @@ export interface UnauthorizedError {
     message: string;
 }
 import { AxiosInstance, AxiosRequestConfig, ResponseType } from "axios";
-export declare type QueryParamsType = Record<string | number, any>;
+export type QueryParamsType = Record<string | number, any>;
 export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
     secure?: boolean;
     path: string;
@@ -32,7 +32,7 @@ export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "pa
     format?: ResponseType;
     body?: unknown;
 }
-export declare type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
+export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
 export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
     securityWorker?: (securityData: SecurityDataType | null) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
     secure?: boolean;
