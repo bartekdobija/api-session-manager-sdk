@@ -12,6 +12,9 @@
     "url": "https://github.com/bartekdobija/api-session-manager-sdk/issues"
   },
   "homepage": "https://github.com/bartekdobija/api-session-manager-sdk#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -21,11 +24,11 @@
     "artifactregistry-login": "npx google-artifactregistry-auth"
   },
   "dependencies": {
-    "axios": "^0.21.4",
-    "dotenv": "^16.0.0",
-    "typescript": "^4.5.2"
+    "axios": "^1.13.6",
+    "dotenv": "^17.3.1",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "swagger-typescript-api": "^9.3.1"
+    "swagger-typescript-api": "^13.2.18"
   }
 }
