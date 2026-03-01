@@ -20,7 +20,7 @@
   "scripts": {
     "build": "tsc",
     "sdk:generate": "SYNC_SERVICES='api-session-manager' GITHUB_TOKEN=$(cat ~/.github_token) node .scripts/sync.js && node .scripts/generator.js",
-    "release": "npm run sdk:generate && npm version --patch && npm run build && npm publish && .scripts/release.sh",
+    "release": "npm run sdk:generate && npm version patch && npm run build && npm publish && .scripts/release.sh",
     "artifactregistry-login": "npx google-artifactregistry-auth"
   },
   "dependencies": {
